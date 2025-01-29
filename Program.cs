@@ -69,12 +69,29 @@ namespace Blog
             Console.WriteLine("How many last comments each user left:");
             // 'last comment' is the latest Comment in each Post
             //ToDo: write a query and dump the data to console
-            // Expected result (format could be different, e.g. object serialized to JSON is ok):
+
+            var lastCommentsAmount = context.BlogPosts
+                .Select(b => new
+                {
+                    LastCommentAuthor = b.Comments
+                        .OrderBy(c => c.CreatedDate)
+                        .LastOrDefault()
+                        .UserName
+                })
+                .GroupBy(c => c.LastCommentAuthor)
+                .Select(lc => new
+                {
+                    UserName = lc.Key,
+                    Amount = lc.Count()
+                });
+            
+            Console.WriteLine(JsonSerializer.Serialize(lastCommentsAmount));
+
             // Ivan: 2
             // Petr: 1
 
             // |--------------------------------------------------------------------|
-            
+
         }
 
         private static void InitializeData(MyDbContext context)
