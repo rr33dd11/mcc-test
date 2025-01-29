@@ -29,10 +29,10 @@ namespace Blog
                 {
                     UserName = r.Key,
                     CommentCount = r.Count()
-                })
-                .ToList();
+                });
             
             Console.WriteLine(JsonSerializer.Serialize(commentsAmount));
+            
             // Ivan: 4
             // Petr: 2
             // Elena: 3
@@ -45,7 +45,17 @@ namespace Blog
             
             Console.WriteLine("Posts ordered by date of last comment:");
             //ToDo: write a query and dump the data to console
-            // Expected result (format could be different, e.g. object serialized to JSON is ok):
+
+            var posts = context.BlogPosts
+                .Select(p => new
+                {
+                    Title = p.Title,
+                    LastCommentDate = p.Comments.Max(bc => bc.CreatedDate)
+                })
+                .OrderByDescending(p => p.LastCommentDate);
+            
+            Console.WriteLine(JsonSerializer.Serialize(posts));
+            
             // Post2: '2020-03-06'
             // Post1: '2020-03-05'
             // Post3: '2020-02-14'
