@@ -17,24 +17,45 @@ namespace Blog
             var context = new MyDbContext(loggerFactory);
             context.Database.EnsureCreated();
             InitializeData(context);
-
-            var data = context.BlogPosts.Select(x => x.Title).ToList();
+            
+            // |------------------------------1st query------------------------------|
 
             Console.WriteLine("How many comments each user left:");
             //ToDo: write a query and dump the data to console
-            // Expected result (format could be different, e.g. object serialized to JSON is ok):
+
+            var commentsAmount = context.BlogComments
+                .GroupBy(c => c.UserName)
+                .Select(r => new
+                {
+                    UserName = r.Key,
+                    CommentCount = r.Count()
+                })
+                .ToList();
+            
+            Console.WriteLine(JsonSerializer.Serialize(commentsAmount));
             // Ivan: 4
             // Petr: 2
             // Elena: 3
-
+            
+            // |--------------------------------------------------------------------|
+            
+            
+            
+            // |------------------------------2nd query------------------------------|
+            
             Console.WriteLine("Posts ordered by date of last comment:");
             //ToDo: write a query and dump the data to console
             // Expected result (format could be different, e.g. object serialized to JSON is ok):
             // Post2: '2020-03-06'
             // Post1: '2020-03-05'
             // Post3: '2020-02-14'
-
-
+            
+            // |--------------------------------------------------------------------|
+            
+            
+            
+            // |------------------------------3rd query------------------------------|
+            
             Console.WriteLine("How many last comments each user left:");
             // 'last comment' is the latest Comment in each Post
             //ToDo: write a query and dump the data to console
@@ -42,16 +63,8 @@ namespace Blog
             // Ivan: 2
             // Petr: 1
 
+            // |--------------------------------------------------------------------|
             
-            // Console.WriteLine(
-            //     JsonSerializer.Serialize(BlogService.NumberOfCommentsPerUser(context)));
-            // Console.WriteLine(
-            //     JsonSerializer.Serialize(BlogService.PostsOrderedByLastCommentDate(context)));
-            // Console.WriteLine(
-            //     JsonSerializer.Serialize(BlogService.NumberOfLastCommentsLeftByUser(context)));
-
-
-            Console.WriteLine(JsonSerializer.Serialize(data));
         }
 
         private static void InitializeData(MyDbContext context)
