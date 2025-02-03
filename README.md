@@ -1,5 +1,5 @@
 # mcc-test
 
-Frontend part -> front-task branch; 
+[Frontend part](https://github.com/rr33dd11/mcc-test/tree/front-task)
 
-Backend -> back-task branch
+[Backend part](https://github.com/rr33dd11/mcc-test/tree/back-task)
