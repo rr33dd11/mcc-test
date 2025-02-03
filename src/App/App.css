@@ -1,0 +1,109 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.App {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+  margin: 0;
+}
+
+.tree-container {
+  width: 500px;
+  border: 2px solid green;
+  border-radius: 5px;
+
+}
+
+.tree-header {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: green;
+  padding: 10px;
+  border-bottom: 2px solid green;
+}
+
+.tree-body {
+  padding: 15px;
+  min-height: 300px;
+  color: green;
+}
+
+.tree-list {
+  list-style-type: none;
+  margin-top: 0;
+  padding: 0;
+}
+
+.tree-list ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.tree-list li {
+  cursor: pointer;
+  margin: 5px 0;
+  padding: 2px 10px
+}
+
+.tree-list-active {
+  border: 2px solid green;
+  padding: 0 8px
+}
+
+.tree-footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 5px;
+  border-top: 2px solid green;
+}
+
+.tree-btn {
+  border: 2px solid green;
+  color: green;
+  background-color: white;
+  padding: 5px 40px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.tree-btn:hover {
+  background-color: green;
+  color: white;
+}
+
+.tree-btn:disabled {
+  cursor: default;
+  color: gray;
+  border: 2px solid gray;
+  background-color: #e3e3e3;
+}
+
+.tree-btn:disabled:hover {
+  cursor: default;
+  background-color: #e3e3e3;
+  color: gray;
+}
+
+input {
+  border-width: 0;
+  width: 100%;
+  color: green;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+
+}
+
+input:focus {
+  outline: none;
+}
